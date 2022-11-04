@@ -15,6 +15,7 @@
   "dependencies": {
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.0",
+    "@angular/fire": "^7.4.1",
     "@angular/forms": "^14.0.0",
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
@@ -22,6 +23,7 @@
     "@capacitor/cli": "^4.4.0",
     "@capacitor/core": "^4.4.0",
     "@capacitor/preferences": "^4.0.1",
+    "@google-cloud/firestore": "^6.4.1",
     "@ionic/angular": "^6.1.9",
     "firebase-tools": "^11.16.0",
     "ionicons": "^6.0.3",

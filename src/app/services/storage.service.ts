@@ -10,15 +10,14 @@ export class StorageService {
 
   constructor() { }
 
-  async setPreference(key, value){
+  async setPreference(key: string, value: string){
     await Preferences.set({
       key,
       value
     });
   }
 
-  async getPreference(key){
-    const ret = await Preferences.get({ key });
-    return ret;
+  async getPreference(key: string){
+    return Preferences.get({ key });
   }
 }

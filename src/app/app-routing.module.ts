@@ -11,6 +11,10 @@ const routes: Routes = [
     path: 'auth-screen',
     loadChildren: () => import('./auth-screens/auth-screen/auth-screen.module').then( m => m.AuthScreenPageModule),
     canLoad: [IntroGuard]
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
   }
 ];
 @NgModule({

@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "luigi-deliveries"
+  },
+  "targets": {
+    "luigi-deliveries": {
+      "hosting": {
+        "app": [
+          "luigi-deliveries"
+        ]
+      }
+    }
   }
 }
