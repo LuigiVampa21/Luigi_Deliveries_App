@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { IntroGuard } from './guards/intro.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth-screen', pathMatch:'full' },
@@ -8,7 +9,8 @@ const routes: Routes = [
   },
   {
     path: 'auth-screen',
-    loadChildren: () => import('./auth-screens/auth-screen/auth-screen.module').then( m => m.AuthScreenPageModule)
+    loadChildren: () => import('./auth-screens/auth-screen/auth-screen.module').then( m => m.AuthScreenPageModule),
+    canLoad: [IntroGuard]
   }
 ];
 @NgModule({
