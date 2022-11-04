@@ -20,7 +20,11 @@ export class AuthService {
       const registeredUser = await createUserWithEmailAndPassword(this._fireAuth, form.email, form.password);
       const uid = registeredUser.user.uid;
       const dataRef = doc(this._firestore, `users/${uid}`);
-      setDoc(dataRef, form);
+      const data = {
+        email: form.email,
+        username: form.username
+      };
+      setDoc(dataRef, data);
       this.storage.setPreference('userID', uid);
       return uid;
     }catch(err){

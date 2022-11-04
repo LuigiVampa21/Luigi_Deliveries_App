@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-no-padding" mode="md">
+      <ion-label>
+        <ion-text color="medium">NOW</ion-text>
+        <ion-icon name="arrow-forward-outline" color="medium"></ion-icon>
+        <ion-text><strong>{{ loc }}</strong></ion-text>
+      </ion-label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-row>
+    <swiper [config]="bannerConfig" class="banners">
+      <ng-template swiperSlide *ngFor="let banner of banners">
+        <img [src]="banner.banner" />
+      </ng-template>
+    </swiper>
+  </ion-row>
+</ion-content>
