@@ -1,5 +1,19 @@
 <ion-content>
-  <div class="" align="center">
-    <img src="assets/images/logo.png" alt="" />
+  <div align="center">
+    <img src="assets/images/logo.png" alt="logo" />
   </div>
+  <ion-list class="ion-margin">
+    <div class="ion-margin" (ionChange)="segmentChanged($event)">
+      <ion-segment mode="ios" [value]="segment">
+        <ion-segment-button value="1">
+          <ion-label>Log In</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="2">
+          <ion-label>Sign Up</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <app-login *ngIf="segment === '1'"></app-login>
+    <app-signup *ngIf="segment === '2'"></app-signup>
+  </ion-list>
 </ion-content>
