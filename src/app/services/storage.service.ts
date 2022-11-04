@@ -20,4 +20,8 @@ export class StorageService {
   async getPreference(key: string){
     return Preferences.get({ key });
   }
+
+  removePreference(key: string) {
+    return Preferences.remove({key});
+  }
 }

@@ -47,9 +47,9 @@ export class LoginComponent implements OnInit {
       this.isLoading = false;
       let msg = 'Could not sign you in, please try again';
       if(err.code === 'auth/user-not-found') {
-        msg = 'Email Id could not be found';
+        msg = 'Email ID could not be found';
       } else if(err.code === 'auth/wrong-password') {
-        msg = 'Please enter correct password';
+        msg = 'Incorrect password';
       }
       this.showAlert(msg);
     });
