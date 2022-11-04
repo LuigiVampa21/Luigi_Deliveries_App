@@ -28,3 +28,7 @@
 // swiper
 @import 'swiper/css/bundle';
 
+.swiper-pagination-bullet{
+  background-color: var(--ion-color-medium) !important;
+}
+

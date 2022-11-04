@@ -18,4 +18,44 @@
       </ng-template>
     </swiper>
   </ion-row>
+
+  <ion-row>
+    <swiper
+      [config]="bannerConfig"
+      class="ion-text-center category"
+      *ngIf="categories.length > 0"
+    >
+      <ng-template swiperSlide *ngFor="let category of categories">
+        <div align="center">
+          <ion-avatar slot="start">
+            <img [src]="category.image" />
+          </ion-avatar>
+        </div>
+        <ion-label class="ion-text-wrap">{{ category.name }}</ion-label>
+      </ng-template>
+    </swiper>
+  </ion-row>
+
+  <ion-row *ngIf="favorites?.length > 0">
+    <ion-col size="8">
+      <ion-label class="ion-margin-start heading"> Your favorites </ion-label>
+    </ion-col>
+    <ion-col size="4">
+      <ion-button fill="clear" color="medium" size="small">
+        VIEW ALL
+        <ion-icon
+          color="primary"
+          name="chevron-forward-circle-outline"
+          slot="end"
+        ></ion-icon>
+      </ion-button>
+    </ion-col>
+    <swiper [config]="restaurantConfig">
+      <ng-template swiperSlide *ngFor="let favorite of favorites">
+        <ion-card>
+          <!-- <app-restaurant [restaurant]="favorite"></app-restaurant> -->
+        </ion-card>
+      </ng-template>
+    </swiper>
+  </ion-row>
 </ion-content>
