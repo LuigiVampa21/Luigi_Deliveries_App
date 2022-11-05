@@ -53,7 +53,7 @@
     <swiper [config]="restaurantConfig">
       <ng-template swiperSlide *ngFor="let favorite of favorites">
         <ion-card>
-          <!-- <app-restaurant [restaurant]="favorite"></app-restaurant> -->
+          <app-restaurant [restaurant]="favorite"></app-restaurant>
         </ion-card>
       </ng-template>
     </swiper>
