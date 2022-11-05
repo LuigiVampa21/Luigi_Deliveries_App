@@ -58,4 +58,27 @@
       </ng-template>
     </swiper>
   </ion-row>
+
+  <ion-row *ngIf="offers?.length > 0">
+    <ion-col size="8">
+      <ion-label class="ion-margin-start heading"> Top offers </ion-label>
+    </ion-col>
+    <ion-col size="4">
+      <ion-button fill="clear" color="medium" size="small">
+        VIEW ALL
+        <ion-icon
+          color="primary"
+          name="chevron-forward-circle-outline"
+          slot="end"
+        ></ion-icon>
+      </ion-button>
+    </ion-col>
+    <swiper [config]="restaurantConfig">
+      <ng-template swiperSlide *ngFor="let offer of offers">
+        <ion-card>
+          <app-restaurant [restaurant]="offer"></app-restaurant>
+        </ion-card>
+      </ng-template>
+    </swiper>
+  </ion-row>
 </ion-content>
