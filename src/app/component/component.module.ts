@@ -9,11 +9,11 @@ export const components = [
 
 
 @NgModule({
-  declarations: components,
+  declarations: [...components],
   imports: [
     CommonModule,
     IonicModule,
   ],
-  exports: components
+  exports: [...components]
 })
 export class ComponentModule { }

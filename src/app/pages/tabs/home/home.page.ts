@@ -224,7 +224,7 @@ export class HomePage implements OnInit, AfterContentChecked {
       component: PopoverComponent,
       cssClass: 'custom-popover',
       event: ev,
-      translucent: true
+      translucent: false
     });
     await popover.present();
 

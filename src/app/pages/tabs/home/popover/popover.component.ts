@@ -11,7 +11,7 @@ export class PopoverComponent implements OnInit {
   constructor(public popoverController: PopoverController) { }
 
   ngOnInit() {
-    setTimeout( () => {
+    setTimeout(() => {
       this.popoverController.dismiss();
     },8000);
   }
