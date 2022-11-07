@@ -15,6 +15,8 @@ import { provideFunctions,getFunctions } from '@angular/fire/functions';
 import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx';
+import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +29,7 @@ import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     LocationAccuracy,
+    NativeGeocoder,
   ],
   bootstrap: [AppComponent],
 })

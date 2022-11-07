@@ -19,23 +19,6 @@
     </swiper>
   </ion-row>
 
-  <!-- <ion-row>
-    <swiper
-      [config]="bannerConfig"
-      class="ion-text-center category"
-      *ngIf="categories.length > 0"
-    >
-      <ng-template swiperSlide *ngFor="let category of categories">
-        <div align="center">
-          <ion-avatar slot="start">
-            <img [src]="category.image" />
-          </ion-avatar>
-        </div>
-        <ion-label class="ion-text-wrap">{{ category.name }}</ion-label>
-      </ng-template>
-    </swiper>
-  </ion-row> -->
-
   <ion-row class="ion-text-center category" *ngIf="categories?.length > 0">
     <swiper [config]="categoryConfig">
       <ng-template swiperSlide *ngFor="let category of categories">

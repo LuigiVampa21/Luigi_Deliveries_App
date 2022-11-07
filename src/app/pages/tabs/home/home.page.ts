@@ -25,7 +25,11 @@ export class HomePage implements OnInit, AfterContentChecked {
   favorites = [];
   offers = [];
   nearby = [];
-  constructor(public popoverController: PopoverController, private locationService: LocationService, private locationAccuracy: LocationAccuracy) { }
+  constructor(
+    public popoverController: PopoverController,
+    private locationService: LocationService,
+    private locationAccuracy: LocationAccuracy
+    ) { }
 
   ngOnInit() {
     this.banners = [
@@ -230,7 +234,6 @@ export class HomePage implements OnInit, AfterContentChecked {
     await popover.present();
 
     const { data } = await popover.onDidDismiss();
-    console.log('onDidDismiss resolved with data', data);
     if(data) {
       this.enableLocation();
     } else {
@@ -240,15 +243,18 @@ export class HomePage implements OnInit, AfterContentChecked {
 
   async enableLocation() {
     try {
-      const canRequest: boolean = await this.locationAccuracy.canRequest();
-      if(canRequest) {
-        await this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
-        return true;
+      const status = await this.locationService.requestLocationPermission();
+      console.log(status);
+      if(status?.location == 'granted') {
+        const stat = await this.locationService.enableLocation();
+        if(stat) {
+          const coordinates = await this.locationService.getCurrentLocation();
+          console.log(coordinates);
+          this.getAddress(coordinates);
+        }
       }
-      return false;
-    } catch(err) {
-      console.log(err);
-      throw(err);
+    } catch(e) {
+      console.log(e);
     }
   }
 
@@ -259,7 +265,24 @@ export class HomePage implements OnInit, AfterContentChecked {
     else this.loc = 'Nice, FR';
     }catch(err){
       console.log(err);
-
     }
+  }
+
+  async getAddress(coordinates: any){
+    try{
+      const address = await this.locationService.reverseGeocoder(coordinates.coords.lat, coordinates.coords.lng);
+      this.loc =
+        (address?.areasOfInterest[0] ? address?.areasOfInterest[0] + ', ' : '') +
+        (address?.subLocality ? address?.subLocality + ', ' : '') +
+        (' - ' + address?.postalCode + ', ') +
+        (address?.locality + ', ') +
+        (address?.administrativeArea ? address?.administrativeArea + ', ' : '') +
+        (address?.countryName);
+
+    const coords = await this.locationService.forwardGeocoder(this.loc);
+  }catch(err){
+    console.log(err);
+    throw(err);
+  }
   }
 }
