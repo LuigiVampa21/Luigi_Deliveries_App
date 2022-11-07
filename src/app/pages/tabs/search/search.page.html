@@ -18,7 +18,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [color]="searchBar ? 'light' : ''">
   <ion-grid class="ion-padding-horizontal" *ngIf="!searchBar">
     <ion-row class="ion-align-items-center">
       <ion-icon name="search" size="large"> </ion-icon>
@@ -57,5 +57,19 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <app-restaurant *ngIf="searchBar" [restaurant]="restaurants"></app-restaurant>
+  <ion-list *ngIf="!isLoading && searchBar && restaurants.length > 0">
+    <app-restaurant
+      *ngFor="let restaurant of restaurants"
+      [restaurant]="restaurant"
+    ></app-restaurant>
+  </ion-list>
+
+  <app-empty-screen
+    *ngIf="!isLoading && searchBar && restaurants.length === 0"
+    [model]="item"
+  ></app-empty-screen>
+
+  <div align="center" class="transformCenter">
+    <ion-spinner color="primary" *ngIf="searchBar && isLoading"></ion-spinner>
+  </div>
 </ion-content>

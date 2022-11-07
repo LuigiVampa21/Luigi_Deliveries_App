@@ -35,9 +35,7 @@ export class LoginComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
-    console.log(this.form.value);
     this.authService.login(this.form.value).then((data) => {
-      console.log(data);
       this.router.navigateByUrl('/tabs', {replaceUrl: true});
       this.isLoading = false;
       this.form.reset();
