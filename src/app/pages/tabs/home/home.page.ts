@@ -233,13 +233,15 @@ export class HomePage implements OnInit, AfterContentChecked {
     if(data) {
       this.requestGeolocationPermission();
     } else {
-      this.loc = 'Karol Bagh, Delhi';
+      this.loc = 'Nice, FR';
     }
   }
 
   async requestGeolocationPermission(){
     try{
     const status = await Geolocation.requestPermissions();
+    if(status.location == 'granted') this.getCurrentLocation();
+    else this.loc = 'Nice, FR';
     }catch(err){
       console.log(err);
 

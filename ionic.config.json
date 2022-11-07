@@ -1,5 +1,7 @@
 {
   "name": "Luigi_Deliveries_App",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
