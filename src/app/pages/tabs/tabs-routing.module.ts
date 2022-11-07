@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
@@ -33,6 +32,10 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'restaurants/:id',
+    loadChildren: () => import('./items/items.module').then( m => m.ItemsModule)
+  }
 ];
 
 @NgModule({

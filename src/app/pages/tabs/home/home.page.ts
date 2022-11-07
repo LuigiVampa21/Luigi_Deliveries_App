@@ -3,7 +3,7 @@
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { LocationService } from 'src/app/services/location.service';
-import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx';
+import { ApiService } from 'src/app/services/api.service';
 
 import SwiperCore, { SwiperOptions, Autoplay, Pagination, EffectCoverflow } from 'swiper';
 import { PopoverComponent } from './popover/popover.component';
@@ -28,7 +28,7 @@ export class HomePage implements OnInit, AfterContentChecked {
   constructor(
     public popoverController: PopoverController,
     private locationService: LocationService,
-    private locationAccuracy: LocationAccuracy
+    private apiService: ApiService
     ) { }
 
   ngOnInit() {
@@ -37,148 +37,166 @@ export class HomePage implements OnInit, AfterContentChecked {
       {banner: 'assets/dishes/1.jpg'},
       {banner: 'assets/dishes/cab.jpg'},
     ];
-    this.categories = [
-      { id: 1, name: 'North Indian', image: 'assets/dishes/nan.jpg' },
-      { id: 2, name: 'Italian', image: 'assets/dishes/pasta.jpg' },
-      { id: 3, name: 'Chowmein', image: 'assets/dishes/chowmein.jpg' },
-      { id: 4, name: 'South Indian', image: 'assets/dishes/dosa.jpg' },
-      { id: 5, name: 'Mexican', image: 'assets/dishes/dol.jpg' },
-    ];
-    this.favorites = [
-      {
-        id: '1',
-        cover: 'assets/dishes/restaurant.jpg',
-        name: 'Stayfit',
-        cuisines: [
-          'Indian',
-          'Italian',
-          'Mexican'
-        ],
-        rating: 5,
-        delivery_time: 25,
-        distance: 2.5,
-        price: 100,
-        latitude: 0,
-        longitude: 0
-      },
-      {
-        id: '2',
-        cover: 'assets/dishes/2.jpg',
-        name: 'Stayfit1',
-        cuisines: [
-          'Italian',
-          'Mexican',
-          'Chinese'
-        ],
-        rating: 5,
-        delivery_time: 25,
-        distance: 2.5,
-        price: 100
-      },
-      {
-        id: '3',
-        cover: 'assets/dishes/3.jpg',
-        name: 'Kolkata Roll',
-        cuisines: [
-          'Italian',
-          'Mexican'
-        ],
-        rating: 5,
-        delivery_time: 25,
-        distance: 2.5,
-        price: 100
-      },
-    ];
-    this.offers = [
-      {
-        id: '1',
-        cover: 'assets/dishes/3.jpg',
-        name: 'Kolkata Roll',
-        cuisines: [
-          'Italian',
-          'Mexican'
-        ],
-        rating: 5,
-        delivery_time: 25,
-        distance: 2.5,
-        price: 100
-      },
-      {
-        id: '2',
-        cover: 'assets/dishes/2.jpg',
-        name: 'Stayfit1',
-        cuisines: [
-          'Italian',
-          'Mexican',
-          'Chinese'
-        ],
-        rating: 5,
-        delivery_time: 25,
-        distance: 2.5,
-        price: 100
-      },
-      {
-        id: '3',
-        cover: 'assets/dishes/restaurant.jpg',
-        name: 'Stayfit',
-        cuisines: [
-          'Indian',
-          'Italian',
-          'Mexican'
-        ],
-        rating: 5,
-        delivery_time: 25,
-        distance: 2.5,
-        price: 100,
-        latitude: 0,
-        longitude: 0
-      },
-    ];
-    this.nearby = [
-      {
-        id: '1',
-        cover: 'assets/dishes/restaurant.jpg',
-        name: 'Stayfit',
-        cuisines: [
-          'Indian',
-          'Italian',
-          'Mexican'
-        ],
-        rating: 5,
-        delivery_time: 25,
-        distance: 2.5,
-        price: 100,
-        latitude: 0,
-        longitude: 0
-      },
-      {
-        id: '2',
-        cover: 'assets/dishes/2.jpg',
-        name: 'Stayfit1',
-        cuisines: [
-          'Italian',
-          'Mexican',
-          'Chinese'
-        ],
-        rating: 5,
-        delivery_time: 25,
-        distance: 2.5,
-        price: 100
-      },
-      {
-        id: '3',
-        cover: 'assets/dishes/3.jpg',
-        name: 'Kolkata Roll',
-        cuisines: [
-          'Italian',
-          'Mexican'
-        ],
-        rating: 5,
-        delivery_time: 25,
-        distance: 2.5,
-        price: 100
-      },
-    ];
+    this.categories = [... this.apiService.categories];
+
+    this.favorites = [... this.apiService.favorites];
+    const offers = [... this.apiService.offers];
+    this.offers = offers.sort((a,b) => parseInt(b.id) - parseInt(a.id));
+    this.nearby = [... this.apiService.nearby];
+    // this.categories = [
+    //   { id: 1, name: 'North Indian', image: 'assets/dishes/nan.jpg' },
+    //   { id: 2, name: 'Italian', image: 'assets/dishes/pasta.jpg' },
+    //   { id: 3, name: 'Chowmein', image: 'assets/dishes/chowmein.jpg' },
+    //   { id: 4, name: 'South Indian', image: 'assets/dishes/dosa.jpg' },
+    //   { id: 5, name: 'Mexican', image: 'assets/dishes/dol.jpg' },
+    // ];
+    // this.banners = [
+    //   {banner: 'assets/dishes/11.jpeg'},
+    //   {banner: 'assets/dishes/1.jpg'},
+    //   {banner: 'assets/dishes/cab.jpg'},
+    // ];
+    // this.categories = [
+    //   { id: 1, name: 'North Indian', image: 'assets/dishes/nan.jpg' },
+    //   { id: 2, name: 'Italian', image: 'assets/dishes/pasta.jpg' },
+    //   { id: 3, name: 'Chowmein', image: 'assets/dishes/chowmein.jpg' },
+    //   { id: 4, name: 'South Indian', image: 'assets/dishes/dosa.jpg' },
+    //   { id: 5, name: 'Mexican', image: 'assets/dishes/dol.jpg' },
+    // ];
+    // this.favorites = [
+    //   {
+    //     id: '1',
+    //     cover: 'assets/dishes/restaurant.jpg',
+    //     name: 'Stayfit',
+    //     cuisines: [
+    //       'Indian',
+    //       'Italian',
+    //       'Mexican'
+    //     ],
+    //     rating: 5,
+    //     delivery_time: 25,
+    //     distance: 2.5,
+    //     price: 10,
+    //     latitude: 0,
+    //     longitude: 0
+    //   },
+    //   {
+    //     id: '2',
+    //     cover: 'assets/dishes/2.jpg',
+    //     name: 'Stayfit1',
+    //     cuisines: [
+    //       'Italian',
+    //       'Mexican',
+    //       'Chinese'
+    //     ],
+    //     rating: 5,
+    //     delivery_time: 25,
+    //     distance: 2.5,
+    //     price: 10
+    //   },
+    //   {
+    //     id: '3',
+    //     cover: 'assets/dishes/3.jpg',
+    //     name: 'Kolkata Roll',
+    //     cuisines: [
+    //       'Italian',
+    //       'Mexican'
+    //     ],
+    //     rating: 5,
+    //     delivery_time: 25,
+    //     distance: 2.5,
+    //     price: 10
+    //   },
+    // ];
+    // this.offers = [
+    //   {
+    //     id: '1',
+    //     cover: 'assets/dishes/3.jpg',
+    //     name: 'Kolkata Roll',
+    //     cuisines: [
+    //       'Italian',
+    //       'Mexican'
+    //     ],
+    //     rating: 5,
+    //     delivery_time: 25,
+    //     distance: 2.5,
+    //     price: 10
+    //   },
+    //   {
+    //     id: '2',
+    //     cover: 'assets/dishes/2.jpg',
+    //     name: 'Stayfit1',
+    //     cuisines: [
+    //       'Italian',
+    //       'Mexican',
+    //       'Chinese'
+    //     ],
+    //     rating: 5,
+    //     delivery_time: 25,
+    //     distance: 2.5,
+    //     price: 10
+    //   },
+    //   {
+    //     id: '3',
+    //     cover: 'assets/dishes/restaurant.jpg',
+    //     name: 'Stayfit',
+    //     cuisines: [
+    //       'Indian',
+    //       'Italian',
+    //       'Mexican'
+    //     ],
+    //     rating: 5,
+    //     delivery_time: 25,
+    //     distance: 2.5,
+    //     price: 10,
+    //     latitude: 0,
+    //     longitude: 0
+    //   },
+    // ];
+    // this.nearby = [
+    //   {
+    //     id: '1',
+    //     cover: 'assets/dishes/restaurant.jpg',
+    //     name: 'Stayfit',
+    //     cuisines: [
+    //       'Indian',
+    //       'Italian',
+    //       'Mexican'
+    //     ],
+    //     rating: 5,
+    //     delivery_time: 25,
+    //     distance: 2.5,
+    //     price: 10,
+    //     latitude: 0,
+    //     longitude: 0
+    //   },
+    //   {
+    //     id: '2',
+    //     cover: 'assets/dishes/2.jpg',
+    //     name: 'Stayfit1',
+    //     cuisines: [
+    //       'Italian',
+    //       'Mexican',
+    //       'Chinese'
+    //     ],
+    //     rating: 5,
+    //     delivery_time: 25,
+    //     distance: 2.5,
+    //     price: 10
+    //   },
+    //   {
+    //     id: '3',
+    //     cover: 'assets/dishes/3.jpg',
+    //     name: 'Kolkata Roll',
+    //     cuisines: [
+    //       'Italian',
+    //       'Mexican'
+    //     ],
+    //     rating: 5,
+    //     delivery_time: 25,
+    //     distance: 2.5,
+    //     price: 10
+    //   },
+    // ];
     this.getCurrentLocation();
   }
 

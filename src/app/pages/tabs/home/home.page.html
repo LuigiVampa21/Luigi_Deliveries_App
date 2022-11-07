@@ -49,7 +49,10 @@
     <swiper [config]="restaurantConfig">
       <ng-template swiperSlide *ngFor="let favorite of favorites">
         <ion-card>
-          <app-restaurant [restaurant]="favorite"></app-restaurant>
+          <app-restaurant
+            [restaurant]="favorite"
+            [routerLink]="['/','tabs', 'restaurants', favorite.id]"
+          ></app-restaurant>
         </ion-card>
       </ng-template>
     </swiper>
@@ -72,7 +75,10 @@
     <swiper [config]="restaurantConfig">
       <ng-template swiperSlide *ngFor="let offer of offers">
         <ion-card>
-          <app-restaurant [restaurant]="offer"></app-restaurant>
+          <app-restaurant
+            [restaurant]="offer"
+            [routerLink]="['/','tabs', 'restaurants', offer.id]"
+          ></app-restaurant>
         </ion-card>
       </ng-template>
     </swiper>
@@ -97,7 +103,10 @@
     <swiper [config]="restaurantConfig">
       <ng-template swiperSlide *ngFor="let item of nearby">
         <ion-card>
-          <app-restaurant [restaurant]="item"></app-restaurant>
+          <app-restaurant
+            [restaurant]="item"
+            [routerLink]="['/','tabs', 'restaurants', item.id]"
+          ></app-restaurant>
         </ion-card>
       </ng-template>
     </swiper>
