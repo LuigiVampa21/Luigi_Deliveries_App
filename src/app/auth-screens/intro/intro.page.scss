@@ -1,16 +1,12 @@
-ion-slides {
+swiper{
   height: 100%;
-  --bullet-background: var(--ion-color-light);
-  ion-slide {
+  div {
+      height: 100%;
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
-  }
-  .topRight {
-      align-items: initial;
-      justify-content: flex-end;
-  }
-  .transformButton {
-      transform: translateY(30vh);
+      .transformButton {
+          transform: translateY(80vh);
+      }
   }
 }

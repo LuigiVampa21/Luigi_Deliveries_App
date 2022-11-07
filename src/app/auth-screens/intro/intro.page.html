@@ -1,30 +1,41 @@
 <ion-content [fullscreen]="true">
-  <ion-slides #slides pager="true" [options]="slideOpts">
-    <ion-slide
-      [style.background-image]="'url(assets/images/screen1.png'"
-      class="topRight"
-    >
-      <ion-button fill="clear" color="light" (click)="goToLogin()"
-        >SKIP</ion-button
+  <swiper [config]="slideOpts">
+    <ng-template swiperSlide>
+      <div
+        [ngStyle]="{'background-image' : 'url(assets/images/screen1.png)'}"
+        class="ion-text-right"
       >
-    </ion-slide>
-    <ion-slide
-      [style.background-image]="'url(assets/images/screen2.png'"
-      class="topRight"
-    >
-      <ion-button fill="clear" color="light" (click)="goToLogin()"
-        >SKIP</ion-button
+        <ion-button fill="clear" color="light" (click)="goToLogin()"
+          >SKIP</ion-button
+        >
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div
+        [ngStyle]="{'background-image' : 'url(assets/images/screen2.png)'}"
+        class="ion-text-right"
       >
-    </ion-slide>
-    <ion-slide [style.background-image]="'url(assets/images/screen3.png'">
-      <ion-button
-        class="transformButton"
-        shape="round"
-        color="light"
-        (click)="goToLogin()"
+        <ion-button fill="clear" color="light" (click)="goToLogin()"
+          >SKIP</ion-button
+        >
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div
+        [ngStyle]="{'background-image' : 'url(assets/images/screen3.png)'}"
+        class="ion-text-center"
       >
-        <ion-text color="primary">LET'S START</ion-text>
-      </ion-button>
-    </ion-slide>
-  </ion-slides>
+        <ion-button
+          shape="round"
+          color="light"
+          (click)="goToLogin()"
+          class="transformButton"
+        >
+          <ion-text color="primary">
+            <strong>Let's Start</strong>
+          </ion-text>
+        </ion-button>
+      </div>
+    </ng-template>
+  </swiper>
 </ion-content>
