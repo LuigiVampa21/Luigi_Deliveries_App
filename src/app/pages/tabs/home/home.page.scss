@@ -5,6 +5,7 @@ ion-header {
           font-size: 1.1rem;
           letter-spacing: 0.5px;
           max-width: 40vh;
+          text-shadow: 1px 1px 1px var(--ion-color-medium);
           ion-label {
               ion-icon {
                   padding: 0 5px;
@@ -41,7 +42,7 @@ ion-content {
 
   ion-row {
       ion-label {
-          font-weight: normal;
+          font-weight: bold;
       }
       ion-label.heading {
           font-size: 1rem;

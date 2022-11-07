@@ -1,0 +1,38 @@
+<ion-content color="dark">
+  <ion-grid class="ion-no-padding">
+    <ion-label color="light" class="ion-padding-horizontal"
+      >Device location off</ion-label
+    >
+    <p class="ion-padding-horizontal">
+      <ion-text color="light">
+        Enabling your lcoation help us deliver your order faster!
+      </ion-text>
+    </p>
+    <ion-row>
+      <ion-col size="5">
+        <ion-button
+          size="small"
+          shape="round"
+          expand="block"
+          fill="outline"
+          color="light"
+          (click)="popoverController.dismiss(false)"
+        >
+          <ion-text>No, Thanks!</ion-text>
+        </ion-button>
+      </ion-col>
+      <ion-col size="7">
+        <ion-button
+          size="small"
+          shape="round"
+          expand="block"
+          fill="outline"
+          color="light"
+          (click)="popoverController.dismiss(true)"
+        >
+          <ion-text>Enable location!</ion-text>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

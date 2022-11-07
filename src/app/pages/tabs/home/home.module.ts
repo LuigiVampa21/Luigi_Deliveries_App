@@ -9,6 +9,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { ComponentModule } from 'src/app/component/component.module';
+import { PopoverComponent } from './popover/popover.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { ComponentModule } from 'src/app/component/component.module';
     SwiperModule,
     ComponentModule,
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, PopoverComponent]
 })
 export class HomePageModule {}

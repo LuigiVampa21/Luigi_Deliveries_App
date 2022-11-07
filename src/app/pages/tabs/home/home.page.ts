@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable  */
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
+import { Geolocation } from '@capacitor/geolocation';
+import { PopoverController } from '@ionic/angular';
 import SwiperCore, { SwiperOptions, Autoplay, Pagination, EffectCoverflow } from 'swiper';
+import { PopoverComponent } from './popover/popover.component';
 SwiperCore.use([Autoplay, Pagination, EffectCoverflow]);
 
 @Component({
@@ -19,7 +23,7 @@ export class HomePage implements OnInit, AfterContentChecked {
   favorites = [];
   offers = [];
   nearby = [];
-  constructor() { }
+  constructor(public popoverController: PopoverController) { }
 
   ngOnInit() {
     this.banners = [
@@ -169,6 +173,7 @@ export class HomePage implements OnInit, AfterContentChecked {
         price: 100
       },
     ];
+    this.getCurrentLocation();
   }
 
   ngAfterContentChecked(): void {
@@ -189,5 +194,55 @@ export class HomePage implements OnInit, AfterContentChecked {
     this.restaurantConfig = {
       slidesPerView: 1.1
     };
+  }
+
+  async getCurrentLocation(){
+    try{
+  const coordinates = await Geolocation.getCurrentPosition();
+  console.log('Current position:', coordinates);
+    }catch(err){
+      console.log(err);
+      this.openPopover();
+    }
+  }
+
+  openPopover(){
+    const ev = {
+      target: {
+        getBoundingClientRect: () => {
+          return {
+            left: 5
+          }
+        }
+      }
+    }
+    this.presentPopover(ev);
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      cssClass: 'custom-popover',
+      event: ev,
+      translucent: true
+    });
+    await popover.present();
+
+    const { data } = await popover.onDidDismiss();
+    console.log('onDidDismiss resolved with data', data);
+    if(data) {
+      this.requestGeolocationPermission();
+    } else {
+      this.loc = 'Karol Bagh, Delhi';
+    }
+  }
+
+  async requestGeolocationPermission(){
+    try{
+    const status = await Geolocation.requestPermissions();
+    }catch(err){
+      console.log(err);
+
+    }
   }
 }
