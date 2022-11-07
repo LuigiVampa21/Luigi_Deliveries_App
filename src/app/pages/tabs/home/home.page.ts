@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable  */
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
-import { Geolocation } from '@capacitor/geolocation';
 import { PopoverController } from '@ionic/angular';
+import { LocationService } from 'src/app/services/location.service';
+import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx';
+
 import SwiperCore, { SwiperOptions, Autoplay, Pagination, EffectCoverflow } from 'swiper';
 import { PopoverComponent } from './popover/popover.component';
 SwiperCore.use([Autoplay, Pagination, EffectCoverflow]);
@@ -23,7 +25,7 @@ export class HomePage implements OnInit, AfterContentChecked {
   favorites = [];
   offers = [];
   nearby = [];
-  constructor(public popoverController: PopoverController) { }
+  constructor(public popoverController: PopoverController, private locationService: LocationService, private locationAccuracy: LocationAccuracy) { }
 
   ngOnInit() {
     this.banners = [
@@ -198,8 +200,7 @@ export class HomePage implements OnInit, AfterContentChecked {
 
   async getCurrentLocation(){
     try{
-  const coordinates = await Geolocation.getCurrentPosition();
-  console.log('Current position:', coordinates);
+  const coordinates = await this.locationService.getCurrentLocation();
     }catch(err){
       console.log(err);
       this.openPopover();
@@ -231,15 +232,29 @@ export class HomePage implements OnInit, AfterContentChecked {
     const { data } = await popover.onDidDismiss();
     console.log('onDidDismiss resolved with data', data);
     if(data) {
-      this.requestGeolocationPermission();
+      this.enableLocation();
     } else {
       this.loc = 'Nice, FR';
     }
   }
 
+  async enableLocation() {
+    try {
+      const canRequest: boolean = await this.locationAccuracy.canRequest();
+      if(canRequest) {
+        await this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
+        return true;
+      }
+      return false;
+    } catch(err) {
+      console.log(err);
+      throw(err);
+    }
+  }
+
   async requestGeolocationPermission(){
     try{
-    const status = await Geolocation.requestPermissions();
+    const status = await this.locationService.requestLocationPermission();
     if(status.location == 'granted') this.getCurrentLocation();
     else this.loc = 'Nice, FR';
     }catch(err){

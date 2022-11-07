@@ -14,6 +14,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFunctions,getFunctions } from '@angular/fire/functions';
 import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +24,10 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
      provideMessaging(() => getMessaging()),
      provideStorage(() => getStorage()),
      provideFirestore(() => getFirestore())],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    LocationAccuracy,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

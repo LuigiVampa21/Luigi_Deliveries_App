@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
+import { LocationService } from 'src/app/services/location.service';
 
 @Component({
   selector: 'app-popover',
@@ -12,8 +13,15 @@ export class PopoverComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.popoverController.dismiss();
+      this.dismissPopover();
     },8000);
   }
 
+  dismissPopover(data?: boolean){
+    this.popoverController.dismiss(data);
+  }
+
+  enableLocation(){
+    this.popoverController.dismiss(true);
+  }
 }

@@ -16,7 +16,7 @@
           expand="block"
           fill="outline"
           color="light"
-          (click)="popoverController.dismiss(false)"
+          (click)="dismissPopover(false)"
         >
           <ion-text>No, Thanks!</ion-text>
         </ion-button>
@@ -28,7 +28,7 @@
           expand="block"
           fill="outline"
           color="light"
-          (click)="popoverController.dismiss(true)"
+          (click)="enableLocation()"
         >
           <ion-text>Enable location!</ion-text>
         </ion-button>
