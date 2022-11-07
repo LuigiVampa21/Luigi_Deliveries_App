@@ -13,7 +13,7 @@ export class ItemsPageComponent implements OnInit {
 
   id: string | number;
   restaurant: any;
-  items: any;
+  items: any[];
   categories: any;
 
   constructor(
@@ -37,9 +37,15 @@ export class ItemsPageComponent implements OnInit {
   }
 
   getData(){
-    this.restaurant = [... this.apiService.allRestaurants].find( r => r.id == this.id);
-    this.categories = [... this.apiService.categories];
-    this.items = [... this.apiService.allItems].find(i => i.uid == this.id);
+    this.restaurant = this.apiService.allRestaurants.find( r => r.id == this.id);
+    this.categories = this.apiService.categories;
+    this.items = [...this.apiService.allItems].filter(i => i.uid == this.id);
+    console.log(this.items);
+
+  }
+
+  getCuisines(cuisine: any){
+    return cuisine.join(', ');
   }
 
 }
